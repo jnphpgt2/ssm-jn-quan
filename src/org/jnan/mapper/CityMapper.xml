@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.jnan.mapper.CityMapper" >
+	<select id="findCity" parameterType="java.lang.String" resultType="city">
+		select * from city 
+		<if test="value !=null and value !=''">
+			ORDER BY ${value} DESC
+		</if>
+	</select>
+	<select id="findProportion" resultType="proportion">
+		select * from proportion
+	</select>
+	<select id="tologin" parameterType="user" resultType="user">
+		select * from user
+		<where>
+			<if test="username!=null and username !=''">
+				and username=#{username}
+			</if>
+			<if test="pwd!=null and pwd !=''">
+				and pwd=#{pwd}
+			</if>
+		</where>
+	</select>
+	<select id="toupdate" parameterType="proportion">
+		update proportion p set p.shehui=#{shehui},p.jingji=#{jingji},p.huanjing=#{huanjing},p.ziyuan=#{ziyuan},p.shenghuo=#{shenghuo},p.gong=#{gong}
+	</select>
+	<select id="gengxin" parameterType="city">
+		update city p set p.shehui=#{shehui},p.jingji=#{jingji},p.huanjing=#{huanjing},p.ziyuan=#{ziyuan},p.shenghuo=#{shenghuo},p.gong=#{gong} where p.cid=#{cid}
+	</select>
+	<select id="updateZong" parameterType="city">
+		update city c set c.zong=#{zong} where c.cid=#{cid}
+	</select>
+	<select id="ufindCity" resultType="city">
+		select * from city 
+	</select>
+	<select id="getDanCity" parameterType="java.lang.String" resultType="city">
+		select * from city where city.cname=#{value}
+	</select>
+</mapper>
